@@ -1,0 +1,354 @@
+<div class="row justify-content-md-center bg_app_primary pt-4">
+    <div class="col p-4">
+
+        <div id="carouselExampleControls" class="carousel slide" data-bs-interval=false *ngIf="!otpVeriffication">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <form class="form" #registerForm1="ngForm" novalidate>
+                        <div class="mb-3">
+                            <label for="" class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="userData.first_name" appAlphabetsOnly
+                                [(ngModel)]="userData.first_name" aria-describedby="helpId" placeholder=""
+                                #first_name="ngModel" required>
+                            <small class="text-danger form-text"
+                                *ngIf="(first_name.touched ) && first_name.errors?.['required']">
+                                First name is required
+                            </small>
+                            <span class="text-danger form-text"
+                                *ngIf="first_name.touched && first_name.errors?.['invalid']">
+                                Please Enter Alphabets Only.
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Middle Name</label>
+                            <input type="text" class="form-control" name="userData.middle_name" appAlphabetsOnly
+                                #middle_name="ngModel" [(ngModel)]="userData.middle_name" aria-describedby="helpId"
+                                placeholder="" required>
+                            <small class="text-danger form-text"
+                                *ngIf="(middle_name.touched ) && middle_name.errors?.['required']">
+                                Middle name is required
+                            </small>
+                            <span class="text-danger form-text"
+                                *ngIf="middle_name.touched && middle_name.errors?.['invalid']">
+                                Please Enter Alphabets Only.
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="userData.last_name"
+                                [(ngModel)]="userData.last_name" aria-describedby="helpId" #last_name="ngModel"
+                                placeholder="" appAlphabetsOnly required>
+                            <small class="text-danger form-text"
+                                *ngIf="(last_name.touched ) && last_name.errors?.['required']">
+                                Middle name is required
+                            </small>
+                            <span class="text-danger form-text"
+                                *ngIf="last_name.touched && last_name.errors?.['invalid']">
+                                Please Enter Alphabets Only.
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label d-block">Select your gender</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" [(ngModel)]="userData.gender" type="radio"
+                                    name="userData.gender" value="Male" required>
+                                <label class="form-check-label" for="">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" [(ngModel)]="userData.gender" type="radio"
+                                    name="userData.gender" value="Female" required>
+                                <label class="form-check-label" for="">Female</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Bio</label>
+                            <textarea class="form-control" rows="3" name="userData.bio"
+                                [(ngModel)]="userData.bio"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Email</label>
+                            <input type="email" class="form-control" aria-describedby="emailHelpId" #email="ngModel"
+                                placeholder="abc@mail.com" name="userData.email" [email]="true"
+                                [(ngModel)]="userData.email" required>
+                            <small class="text-danger form-text" *ngIf="(email.touched ) && email.errors?.['required']">
+                                Email is required
+                            </small>
+                            <span class="text-danger form-text" *ngIf="email.touched && email.errors?.['email']">
+                                Please Enter Valid email.
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" aria-describedby="helpId" name="userData.dob"
+                                [(ngModel)]="userData.dob" placeholder="dd-mm-yyyy" #dob="ngModel"
+                                max="{{Allowonly18Plus()}}" required>
+                            <small class="text-danger form-text" *ngIf="(dob.touched ) && dob.errors?.['required']">
+                                Date is required
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Select Maritual Status</label>
+                            <select class="form-select form-select-md" name="userData.martialstatus"
+                                #martialstatus="ngModel" [(ngModel)]="userData.martialstatus" required>
+                                <option value="" selected disabled> -- Select maritual status --</option>
+                                <option value="Married">Married</option>
+                                <option value="Single">Single</option>
+                                <option value="Divorced">Divorced</option>
+                            </select>
+                            <small class="text-danger form-text"
+                                *ngIf="(martialstatus.touched ) && martialstatus.errors?.['required']">
+                                Martiual Status is required
+                            </small>
+                        </div>
+                        <button type="submit" class="btn btn-outline-dark me-2" [disabled]="!registerForm1.form.valid"
+                            data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            Next
+                        </button>
+                    </form>
+                </div>
+                <div class="carousel-item">
+                    <form class="form" #registerForm2="ngForm" novalidate>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Education</label>
+                            <select class="form-select form-select-md" name="userData.education" #education="ngModel"
+                                [(ngModel)]="userData.education" required>
+                                <option value="" selected disabled>-- Select education --</option>
+                                <option value="unEducated">No Eduacation</option>
+                                <option value="10pass">10th Pass</option>
+                                <option value="12pass">12th Pass</option>
+                                <option value="graduate">Graduate</option>
+                                <option value="pg">Post Graduate</option>
+                            </select>
+                            <small class="text-danger form-text"
+                                *ngIf="(education.touched ) && education.errors?.['required']">
+                                Education Status is required
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Weight</label>
+                            <input type="number" class="form-control" name="userData.weight"
+                                [(ngModel)]="userData.weight" aria-describedby="helpId" [min]="1" placeholder="weight"
+                                #weight="ngModel" required>
+                            <small class="text-danger form-text"
+                                *ngIf="(weight.touched ) && weight.errors?.['required']">
+                                Weight is required
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Height</label>
+                            <input type="number" class="form-control" name="userData.height" #height="ngModel"
+                                [(ngModel)]="userData.height" aria-describedby="helpId" placeholder="" required>
+                            <small class="text-danger form-text"
+                                *ngIf="(height.touched ) && height.errors?.['required']">
+                                Height is required
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="sr-only" for="inlineFormInputGroupUsername">Contact Number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend" style="max-width: 100px;">
+                                    <input type="text" class="form-control" placeholder="+91"
+                                        name="userData.country_code" [(ngModel)]="userData.country_code"
+                                        #countryCode="ngModel" required appCountryCode
+                                        style="border-top-right-radius: 0px;border-bottom-right-radius: 0px;">
+                                </div>
+                                <input type="text" class="form-control" placeholder="9328409012"
+                                    name="userData.contact_number" appNumbersOnly [(ngModel)]="userData.contact_number"
+                                    #contactNumber="ngModel" required>
+                            </div>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(countryCode.touched ) && countryCode.errors?.['required']">
+                                Country code is required
+                            </small>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(countryCode.touched ) && countryCode.errors?.['invalid']">
+                                Country code is not valid
+                            </small>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(contactNumber.touched ) && contactNumber.errors?.['required']">
+                                Contact Number is required
+                            </small>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(contactNumber.touched ) && contactNumber.errors?.['invalid']">
+                                Contact Number is not valid
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Seeking For</label>
+                            <select class="form-select form-select-md" name="userData.preference"
+                                [(ngModel)]="userData.preference" #prefrence="ngModel" required>
+                                <option value="" selected disabled>-- Select your prefrence --</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Others">Others</option>
+                            </select>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(prefrence.touched ) && prefrence.errors?.['required']">
+                                Your Preference is required
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Address</label>
+                            <textarea class="form-control" rows="3" name="userData.address"
+                                [(ngModel)]="userData.address" required #address="ngModel"></textarea>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(address.touched ) && address.errors?.['required']">
+                                Address is required
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">ZipCode</label>
+                            <input type="text" class="form-control" name="userData.zip_code" #zipcode="ngModel"
+                                [(ngModel)]="userData.zip_code" aria-describedby="helpId" placeholder="" required
+                                appNumbersOnly [minlength]="4">
+                            <small class="text-danger" *ngIf="(zipcode.touched ) && zipcode.errors?.['required']">
+                                ZipCode is required
+                            </small>
+                            <small class="text-danger" *ngIf="(zipcode.touched ) && zipcode.errors?.['minlength']">
+                                Minmum 4 digit is required
+                            </small>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(zipcode.touched ) && zipcode.errors?.['invalid'] && !zipcode.errors?.['required']">
+                                Please enter numbers only
+                            </small>
+                        </div>
+                        <button type="button" class="btn btn-outline-dark me-2"
+                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-outline-dark me-2" [disabled]="!registerForm2.form.valid"
+                            data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            Next
+                        </button>
+                    </form>
+                </div>
+                <div class="carousel-item">
+                    <form class="form" #registerForm3="ngForm"
+                        [appMatchPassword]="['userData.password', 'userData.confirmPassword']" novalidate>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Select your Zodiac</label>
+                            <select class="form-select form-select-md" name="userData.zodiac_id"
+                                [(ngModel)]="userData.zodiac_id" #zoidac="ngModel" required>
+                                <option value="{{item.id}}" *ngFor="let item of zodiacs">{{item.name}}</option>
+                            </select>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(zoidac.touched ) && zoidac.errors?.['required']">
+                                Zodiac is required
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label d-block">Select Ethinicity</label>
+                            <div class="btn-group multiSelection d-flex flex-wrap p-3" role="group">
+                                <ng-template ngFor let-item [ngForOf]="ethinicities" let-i="index">
+                                    <!-- [(ngModel)]="userData.ethicity" -->
+                                    <input value="{{item.id}}" type="checkbox" [(ngModel)]="item.checked"
+                                        name="userData.ethicity" class="btn-check" id="ethinicty{{item.id}}"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-secondary my-2"
+                                        for="ethinicty{{item.id}}">{{item.name}}</label>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label d-block">Food Preferences</label>
+                            <div class="btn-group multiSelection d-flex flex-wrap p-3" role="group">
+                                <ng-template ngFor [ngForOf]="foodAndDrinks" let-item let-i="index">
+                                    <!-- [ngForOf]="foodAndDrinks" -->
+                                    <input [(ngModel)]="item.checked" value="{{item.id}}" type="checkbox"
+                                        name="userData.food_preference" class="btn-check" id="fnd{{item.id}}"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-secondary my-2"
+                                        for="fnd{{item.id}}">{{item.name}}</label>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label d-block">Going out Preferences</label>
+                            <div class="btn-group multiSelection d-flex flex-wrap p-3" role="group">
+                                <ng-template ngFor let-item [ngForOf]="goingOuts" let-i="index">
+                                    <!-- [(ngModel)]="userData.goingout_preference" -->
+                                    <input value="{{item.id}}" [(ngModel)]="item.checked" type="checkbox"
+                                        name="userData.goingout_preference" class="btn-check" id="gop{{item.id}}"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-secondary my-2"
+                                        for="gop{{item.id}}">{{item.name}}</label>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Password</label>
+                            <input appPasswordPattern type="password" [(ngModel)]="userData.password"
+                                name="userData.password" #password="ngModel" class="form-control" placeholder=""
+                                required>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(password.touched ) && password.errors?.['required']">
+                                Password is required
+                            </small>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="password.touched && password.errors?.['invalidPassword']">
+                                Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                                letter and 1 number
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" [(ngModel)]="userData.confirmPassword"
+                                name="userData.confirmPassword" placeholder="" #confirmPassword="ngModel" required>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="(confirmPassword.touched) && confirmPassword.errors?.['required']">
+                                Confirm Password is required
+                            </small>
+                            <small class="text-danger form-text d-block"
+                                *ngIf="confirmPassword.touched && confirmPassword.errors?.['passwordMismatch']">
+                                Passwords doesnot match
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="file">Choose File</label>
+                            <input type="file" id="file" (change)="handleFileInput($event)">
+                        </div>
+                        <button type="button" class="btn btn-outline-dark me-2"
+                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            Previous
+                        </button>
+                        <button type="submit" class="btn btn-outline-success"
+                            [disabled]="!registerForm3.form.valid && isLoading" (click)="GetUserData()">
+                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"
+                                *ngIf="isLoading"></span>
+                            Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center d-flex justify-content-center align-item-center flex-column"
+            *ngIf="otpVeriffication">
+            <div class="card-header">
+                Verify OTP
+            </div>
+            <div class="card-body" style="max-width: 200px;margin-inline: auto;">
+                <form class="form" #otp="ngForm" novalidate>
+                    <h5 class="card-title">Please check your email</h5>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="otpData.otp" id="" aria-describedby="helpId"
+                            placeholder="" #otpFeild="ngModel" [(ngModel)]="otpData.otp" [required]="true"
+                            appNumbersOnly>
+                        <small class="text-danger form-text d-block"
+                            *ngIf="(otpFeild.touched) && otpFeild.errors?.['required']">
+                            OTP is required
+                        </small>
+                        <small class="text-danger form-text d-block"
+                            *ngIf="(otpFeild.touched ) && otpFeild.errors?.['invalid'] && !otpFeild.errors?.['required']">
+                            Please enter numbers only
+                        </small>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" name="" id="" class="btn btn-primary" [disabled]="!otp.form.valid"
+                            (click)="VerifyOtp()">
+                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"
+                                *ngIf="isLoading"></span>Verify</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
