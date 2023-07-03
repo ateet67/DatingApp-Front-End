@@ -11,6 +11,7 @@ import { User as Usermpdel } from 'src/app/shared/models/user.model';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,6 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
-  router: Router = new Router();
   ethinicities: Ethnicity[] = [];
   zodiacs: Zodiac[] = [];
   professions: Profession[] = [];
@@ -36,7 +36,7 @@ export class RegisterComponent {
     otptoken: ""
   };
 
-  constructor(private service: CustomService, private authServivce: AuthService) { }
+  constructor(private service: CustomService, private authServivce: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.service.getProfessions().subscribe((res: Profession[]) => {
@@ -64,24 +64,27 @@ export class RegisterComponent {
     });
   }
 
-  GetUserData() {
-    this.isLoading = true;
-    console.log(moment(this.userData.dob).format('YYYY-MM-DD'));
-    this.userData.dob = moment(this.userData.dob).format('YYYY-MM-DD');
-    this.userData.ethicity = this.ethinicities.filter(e => e.checked).map(x => x.id ?? 0);
-    this.userData.food_preference = this.foodAndDrinks.filter(e => e.checked).map(x => x.id ?? 0);
-    this.userData.goingout_preference = this.goingOuts.filter(e => e.checked).map(x => x.id ?? 0);
-    console.log(this.userData);
-    this.authServivce.registerUser(this.userData).subscribe((data: any) => {
-      console.log(data);
-      setTimeout(() => {
-        this.isLoading = false;
-        if (data.otpToken) {
-          this.otpData.otptoken = data.otpToken;
-          this.otpVeriffication = true;
-        }
-      }, 1000);
-    });
+  GetUserData(form: NgForm) {
+    form.form.markAllAsTouched();
+    if (form.form.valid) {
+      this.isLoading = true;
+      console.log(moment(this.userData.dob).format('YYYY-MM-DD'));
+      this.userData.dob = moment(this.userData.dob).format('YYYY-MM-DD');
+      this.userData.ethicity = this.ethinicities.filter(e => e.checked).map(x => x.id ?? 0);
+      this.userData.food_preference = this.foodAndDrinks.filter(e => e.checked).map(x => x.id ?? 0);
+      this.userData.goingout_preference = this.goingOuts.filter(e => e.checked).map(x => x.id ?? 0);
+      console.log(this.userData);
+      this.authServivce.registerUser(this.userData).subscribe((data: any) => {
+        console.log(data);
+        setTimeout(() => {
+          this.isLoading = false;
+          if (data.otpToken) {
+            this.otpData.otptoken = data.otpToken;
+            this.otpVeriffication = true;
+          }
+        }, 1000);
+      });
+    }
   }
 
   obj2FormData(obj: any, form?: any, namespace?: any) {

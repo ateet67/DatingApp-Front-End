@@ -1,6 +1,6 @@
 import { Directive, ElementRef } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS } from '@angular/forms';
-import { CustomvalidationService } from '../core/validation/customvalidation.service';
+import { CustomvalidationService } from '../validation/customvalidation.service';
 
 @Directive({
   selector: '[appAlphabetsOnly]',

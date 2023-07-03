@@ -1,7 +1,7 @@
 import { Directive, forwardRef } from '@angular/core';
 import { Validator, AbstractControl, NG_ASYNC_VALIDATORS, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { CustomvalidationService } from '../core/validation/customvalidation.service';
+import { CustomvalidationService } from '../validation/customvalidation.service';
 
 @Directive({
   selector: '[appValidateUserName]',

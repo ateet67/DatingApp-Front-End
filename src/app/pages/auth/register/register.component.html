@@ -312,7 +312,7 @@
                             Previous
                         </button>
                         <button type="submit" class="btn btn-outline-success"
-                            [disabled]="!registerForm3.form.valid && isLoading" (click)="GetUserData()">
+                            [disabled]="isLoading" (click)="GetUserData(registerForm3)">
                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"
                                 *ngIf="isLoading"></span>
                             Create</button>
